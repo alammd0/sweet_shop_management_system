@@ -7,7 +7,7 @@ export const createSweet = async (req : Request, res : Response) => {
     try {
         const { name, description, category, price, quantity } = req.body;
 
-        console.log("Hit createSweet - 01");
+        // console.log("Hit createSweet - 01");
 
         if(!name || !description || !category || !price || !quantity){
             return res.status(400).json({
@@ -21,9 +21,9 @@ export const createSweet = async (req : Request, res : Response) => {
 
         // console.log(req.role);
 
-        console.log(typeof req.userId);
+        // console.log(typeof req.userId);
 
-        console.log("Hit createSweet - 02");
+        // console.log("Hit createSweet - 02");
 
         const sweet = await prisma.sweet.create({
             data : {
@@ -42,8 +42,8 @@ export const createSweet = async (req : Request, res : Response) => {
             })
         }
 
-        console.log("Hit createSweet - 03");
-        console.log(sweet);
+        // console.log("Hit createSweet - 03");
+        // console.log(sweet);
 
         return res.status(201).json({
             message : "Sweet created successfully",
@@ -128,15 +128,9 @@ export const updateSweet = async (req : Request, res : Response) => {
 
 export const viewAllAvailableSweets = async (req : Request, res : Response) => {
     try{
-        const sweets = await prisma.sweet.findMany({
-            select : {
-                user : {
-                    select : {
-                        name : true
-                    }
-                }
-            }
-        })
+        const sweets = await prisma.sweet.findMany();
+
+        // console.log(sweets);
 
         return res.status(200).json({
             message : "Sweets retrieved successfully",
