@@ -212,7 +212,7 @@ export type SweetGroupByOutputType = {
   name: string
   description: string
   category: string
-  image: string
+  image: string | null
   price: number
   quantity: number
   userId: string
@@ -247,7 +247,7 @@ export type SweetWhereInput = {
   name?: Prisma.StringFilter<"Sweet"> | string
   description?: Prisma.StringFilter<"Sweet"> | string
   category?: Prisma.StringFilter<"Sweet"> | string
-  image?: Prisma.StringFilter<"Sweet"> | string
+  image?: Prisma.StringNullableFilter<"Sweet"> | string | null
   price?: Prisma.IntFilter<"Sweet"> | number
   quantity?: Prisma.IntFilter<"Sweet"> | number
   userId?: Prisma.StringFilter<"Sweet"> | string
@@ -260,7 +260,7 @@ export type SweetOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -276,7 +276,7 @@ export type SweetWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Sweet"> | string
   description?: Prisma.StringFilter<"Sweet"> | string
   category?: Prisma.StringFilter<"Sweet"> | string
-  image?: Prisma.StringFilter<"Sweet"> | string
+  image?: Prisma.StringNullableFilter<"Sweet"> | string | null
   price?: Prisma.IntFilter<"Sweet"> | number
   quantity?: Prisma.IntFilter<"Sweet"> | number
   userId?: Prisma.StringFilter<"Sweet"> | string
@@ -289,7 +289,7 @@ export type SweetOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -309,7 +309,7 @@ export type SweetScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Sweet"> | string
   description?: Prisma.StringWithAggregatesFilter<"Sweet"> | string
   category?: Prisma.StringWithAggregatesFilter<"Sweet"> | string
-  image?: Prisma.StringWithAggregatesFilter<"Sweet"> | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"Sweet"> | string | null
   price?: Prisma.IntWithAggregatesFilter<"Sweet"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"Sweet"> | number
   userId?: Prisma.StringWithAggregatesFilter<"Sweet"> | string
@@ -321,7 +321,7 @@ export type SweetCreateInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   createdAt?: Date | string
@@ -333,7 +333,7 @@ export type SweetUncheckedCreateInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   userId: string
@@ -345,7 +345,7 @@ export type SweetUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -357,7 +357,7 @@ export type SweetUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -369,7 +369,7 @@ export type SweetCreateManyInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   userId: string
@@ -381,7 +381,7 @@ export type SweetUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -392,7 +392,7 @@ export type SweetUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -497,6 +497,10 @@ export type SweetUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SweetScalarWhereInput | Prisma.SweetScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -510,7 +514,7 @@ export type SweetCreateWithoutUserInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   createdAt?: Date | string
@@ -521,7 +525,7 @@ export type SweetUncheckedCreateWithoutUserInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   createdAt?: Date | string
@@ -561,7 +565,7 @@ export type SweetScalarWhereInput = {
   name?: Prisma.StringFilter<"Sweet"> | string
   description?: Prisma.StringFilter<"Sweet"> | string
   category?: Prisma.StringFilter<"Sweet"> | string
-  image?: Prisma.StringFilter<"Sweet"> | string
+  image?: Prisma.StringNullableFilter<"Sweet"> | string | null
   price?: Prisma.IntFilter<"Sweet"> | number
   quantity?: Prisma.IntFilter<"Sweet"> | number
   userId?: Prisma.StringFilter<"Sweet"> | string
@@ -573,7 +577,7 @@ export type SweetCreateManyUserInput = {
   name: string
   description: string
   category: string
-  image: string
+  image?: string | null
   price: number
   quantity: number
   createdAt?: Date | string
@@ -584,7 +588,7 @@ export type SweetUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -595,7 +599,7 @@ export type SweetUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -606,7 +610,7 @@ export type SweetUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -686,7 +690,7 @@ export type $SweetPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     description: string
     category: string
-    image: string
+    image: string | null
     price: number
     quantity: number
     userId: string

@@ -26,7 +26,7 @@ describe("User login", () => {
             email,
             password
         })
-        
+
         expect(response2.status).toBe(200);
         expect(response2.data.token).toBeDefined();
     })

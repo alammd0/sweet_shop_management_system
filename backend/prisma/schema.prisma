@@ -22,7 +22,7 @@ model Sweet {
   name        String
   description String
   category    String
-  image       String
+  image       String?
   price       Int
   quantity    Int
   user        User     @relation(fields: [userId], references: [id])
