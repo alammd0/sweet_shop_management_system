@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+  sweet     Sweet[]
+  createdAt DateTime @default(now())
+}
+
+model Sweet {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  category    String
+  image       String
+  price       Int
+  quantity    Int
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
