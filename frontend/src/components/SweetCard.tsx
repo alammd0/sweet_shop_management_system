@@ -2,6 +2,7 @@
 import { ShoppingCart, Pencil, Trash2 } from "lucide-react"
 import type { Sweet } from "../utils/types"
 import Button from "@mui/material/Button"
+import { Link } from "react-router-dom"
 
 interface SweetCardProps {
     sweet: Sweet
@@ -52,13 +53,14 @@ export function SweetCard({ sweet, isAdmin = false, onPurchase, onEdit, onDelete
                         <Trash2 onClick={() => onDelete?.(sweet.id)} className="mr-2 h-4 w-4 text-red-700" />
                     </>
                 ) : (
-                <Button variant="outlined" className="w-full" disabled={sweet.quantity === 0} onClick={() => onPurchase?.(sweet.id)}>
-                    <ShoppingCart className="mr-2 h-4 w-4" />
-                    {sweet.quantity === 0 ? "Out of Stock" : "Purchase"}
-                </Button>
+                 <Link to={`/sweets/${sweet.id}/purchase`} className="w-full">
+                    <Button variant="outlined" className="w-full" disabled={sweet.quantity === 0} onClick={() => onPurchase?.(sweet.id)}>
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        {sweet.quantity === 0 ? "Out of Stock" : "ADD TO CART"}
+                    </Button>
+                 </Link>
                 )}
             </div>
-
         </div>
   )
 }

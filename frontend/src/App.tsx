@@ -7,6 +7,7 @@ import type { RootState } from "./app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "./app/auth/authSlice";
 import { toast } from "react-toastify";
+import SweetCart from "./components/SweetCart";
 
 
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/sweets/:id/purchase" element={<SweetCart />} />
         </Routes>
      </div>
   )

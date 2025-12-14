@@ -65,7 +65,7 @@ describe("Sweets Related CRUD Operations", () => {
             quantity
         }, {
             headers : {
-                Authorization : adminToken
+                Authorization : `Bearer ${adminToken}`
             }
         })
 
@@ -84,7 +84,7 @@ describe("Sweets Related CRUD Operations", () => {
     test("User can view a sweet", async () => {
         const response = await axios.get(`${BACKEND_URL}/api/sweets/${sweetId}`, {
             headers : {
-                Authorization : userToken
+                Authorization : `Bearer ${userToken}`
             }
         })
 
@@ -108,7 +108,7 @@ describe("Sweets Related CRUD Operations", () => {
             quantity
         }, {
             headers : {
-                Authorization : adminToken
+                Authorization : `Bearer ${adminToken}`
             }
         })
 
@@ -124,7 +124,7 @@ describe("Sweets Related CRUD Operations", () => {
     test("Admin can delete a sweet", async () => {
         const response = await axios.delete(`${BACKEND_URL}/api/sweets/${sweetId}`, {
             headers : {
-                Authorization : adminToken
+                Authorization : `Bearer ${adminToken}`
             }
         })
 
@@ -135,7 +135,7 @@ describe("Sweets Related CRUD Operations", () => {
     test("User can view all available sweets", async () => {
         const response = await axios.get(`${BACKEND_URL}/api/sweets`, {
             headers : {
-                Authorization : userToken
+                Authorization : `Bearer ${userToken}`
             }
         })
 
@@ -144,32 +144,28 @@ describe("Sweets Related CRUD Operations", () => {
     })
 
     // 8. purchase sweet
-    // test("user can purchase a sweet", async () => {
-    //     const response = await axios.post(`${BACKEND_URL}/api/sweets/${sweetId}/purchase`, {
-    //         headers : {
-    //             Authorization : userToken
-    //         }
-    //     })
+    test("user can purchase a sweet", async () => {
+        const response = await axios.post(`${BACKEND_URL}/api/sweets/${sweetId}/purchase`, {}, {
+            headers : {
+                Authorization : `Bearer ${userToken}`
+            }
+        })
 
-    //     console.log(response)
+        expect(response.status).toBe(200);
+        expect(response.data.data.quantity).toBeDefined();
+    })
 
-    //     expect(response.status).toBe(200);
-    //     expect(response.data.data.quantity).toBeDefined();
-    // })
+    // 9. restock sweet
+    test("Admin can restock a sweet", async () => {
+        const response = await axios.put(`${BACKEND_URL}/api/sweets/${sweetId}/restock`, {
+            quantity : 1
+        }, {
+            headers : {
+                Authorization : `Bearer ${adminToken}`
+            }
+        })
 
-    // // 9. restock sweet
-    // test("Admin can restock a sweet", async () => {
-    //     const response = await axios.put(`${BACKEND_URL}/api/sweets/${sweetId}/restock`, {
-    //         quantity : 1
-    //     }, {
-    //         headers : {
-    //             Authorization : adminToken
-    //         }
-    //     })
-
-    //     console.log(response)
-
-    //     expect(response.status).toBe(200);
-    //     expect(response.data.data.quantity).toBe(1);
-    // })
+        expect(response.status).toBe(200);
+        expect(response.data.data.quantity).toBe(1);
+    })
 })

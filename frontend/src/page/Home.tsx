@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";
 import type { Sweet } from "../utils/types";
 import { mockSweets } from "../utils/mockSweets";
-import { useEffect, useEffectEvent, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SweetCard } from "../components/SweetCard";
 import { SweetFormDialog } from "../components/SweetFormDialog";
 import apiClient from "../service/apiconnector";
 import { BACKEND_URL } from "../service/backendURL";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -67,11 +68,7 @@ export default function Home() {
 
     const handleSaveSweet = async (sweetData: Omit<Sweet, "id"> & { id?: string }) => {
         if (sweetData.id) {
-            // Update existing sweet
-            setSweets(sweets.map((s) => (s.id === sweetData.id ? (sweetData as Sweet) : s)))
-        } else {
-
-            const response = await apiClient.post(`${BACKEND_URL}/api/sweets`,  {
+            const response = await apiClient.put(`${BACKEND_URL}/api/sweets/${sweetData.id}`, {
                 name : sweetData.name,
                 description : sweetData.description,
                 category : sweetData.category,
@@ -84,7 +81,27 @@ export default function Home() {
                 }
             })
 
-            console.log(response);
+            if(response.status === 200){
+                setSweets(sweets.map((s) => (s.id === sweetData.id ? (sweetData as Sweet) : s)))
+                toast.success(response.data.message)
+            }
+            else{
+                toast.error(response.data.message)
+            }
+
+        } else {
+            const response = await apiClient.post(`${BACKEND_URL}/api/sweets`,  {
+                name : sweetData.name,
+                description : sweetData.description,
+                category : sweetData.category,
+                price : sweetData.price,
+                quantity : sweetData.quantity,
+                image : sweetData.image
+            }, {
+                headers : {
+                    Authorization : `${token}`
+                }
+            })
 
             if(response.status === 201){
                 // Add new sweet
@@ -102,8 +119,20 @@ export default function Home() {
         setEditingSweet(null)
     }
 
-    const handleDeleteSweet = (id: string) => {
-        setSweets(sweets.filter((s) => s.id !== id))
+    const handleDeleteSweet = async (id: string) => {
+        const response = await apiClient.delete(`${BACKEND_URL}/api/sweets/${id}`, {
+            headers : {
+                Authorization : `${token}`
+            }
+        })
+
+        if(response.status === 200){
+            setSweets(sweets.filter((s) => s.id !== id))
+            toast.success(response.data.message)
+        }
+        else{
+            toast.error(response.data.message)
+        }
     }
 
     const handleEditSweet = (sweet: Sweet) => {
@@ -129,15 +158,28 @@ export default function Home() {
                     <p className="mb-8 text-lg text-muted-foreground text-pretty md:text-xl">
                         Indulge in our handcrafted collection of delicious treats, made with the finest ingredients
                     </p>
-                            <div className="flex flex-wrap items-center justify-center gap-4">
-                                <Button variant="contained" >
-                                    Admin Login
-                                </Button>
-                                <Button  variant="outlined">
-                                    User Login
-                                </Button>
-                            </div>
-               
+                        <div className="flex flex-wrap items-center justify-center gap-4">
+                            {
+                                user ? (
+                                    <Button variant="contained">
+                                        Explore our sweets
+                                    </Button>
+                                    ) : (
+                                    <>
+                                        <Link to="/login" className="w-full">
+                                            <Button variant="contained" >
+                                                Admin Login
+                                            </Button>
+                                        </Link>
+                                        <Link to="/login" className="w-full">
+                                            <Button  variant="outlined">
+                                                User Login
+                                            </Button>
+                                        </Link>
+                                    </>
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             </section>
