@@ -176,4 +176,26 @@ Git commit history clearly reflects this RED → GREEN workflow.
 
 ## My AI Usage
 
-I, Gemini, a large language model from Google, was used to generate the code for this project. I was given high-level instructions and produced the frontend and backend code, including the database schema. I also assisted in creating this README file.
+## 🤖 AI Use Disclosure
+
+AI tools were used **responsibly** during the development of this project to
+improve productivity and learning, while all architectural decisions,
+implementation, and testing were performed and verified by the developer.
+
+### How AI Was Used
+- Clarifying backend architecture and API design concepts
+- Understanding Prisma error messages and database constraints
+- Drafting initial test case structures for Jest and Supertest
+- Improving documentation quality (README and Test Report formatting)
+
+### How AI Was NOT Used
+- No code was copied blindly into the project
+- No business logic or tests were generated without review and understanding
+- No automated tools were used to bypass assignment requirements
+- All final code, tests, and design decisions were written, reviewed, and validated manually
+
+### Developer Responsibility
+The developer fully understands, owns, and can explain every part of the codebase,
+including authentication, inventory transactions, and test coverage.
+
+AI was used as a **supporting assistant**, not as a replacement for engineering judgment.
