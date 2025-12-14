@@ -497,10 +497,6 @@ export type SweetUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.SweetScalarWhereInput | Prisma.SweetScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number

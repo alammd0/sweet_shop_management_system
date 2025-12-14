@@ -5,25 +5,14 @@ import { uploadImage } from "../utils/fileUpload";
 
 export const createSweet = async (req : Request, res : Response) => { 
     try {
-        const { name, description, category, price, quantity } = req.body;
+        const { name, description, category, price, quantity, image} = req.body;
 
-        // console.log("Hit createSweet - 01");
 
         if(!name || !description || !category || !price || !quantity){
             return res.status(400).json({
                 message : "Please provide all the required fields"
             })
         }
-
-        console.log(typeof name, typeof description, typeof category, typeof price, typeof quantity);
-
-        // console.log(req.userId as string);
-
-        // console.log(req.role);
-
-        // console.log(typeof req.userId);
-
-        // console.log("Hit createSweet - 02");
 
         const sweet = await prisma.sweet.create({
             data : {
@@ -32,6 +21,7 @@ export const createSweet = async (req : Request, res : Response) => {
                 category : category,
                 price : price,
                 quantity : quantity,
+                image : image,
                 userId : req.userId as string
             }
         })
@@ -41,9 +31,6 @@ export const createSweet = async (req : Request, res : Response) => {
                 message : "Something went wrong here"
             })
         }
-
-        // console.log("Hit createSweet - 03");
-        // console.log(sweet);
 
         return res.status(201).json({
             message : "Sweet created successfully",
@@ -60,7 +47,7 @@ export const createSweet = async (req : Request, res : Response) => {
 
 export const updateSweet = async (req : Request, res : Response) => {
     try{
-        const { name, description, category, price, quantity } = req.body;
+        const { name, description, category, price, quantity, image} = req.body;
         const { id } = req.params;
 
         const findSweet = await prisma.sweet.findUnique({
@@ -102,6 +89,10 @@ export const updateSweet = async (req : Request, res : Response) => {
 
         if(quantity){
             updateTitle.quantity = quantity;
+        }
+
+        if(image){
+            updateTitle.image = image;
         }
 
 

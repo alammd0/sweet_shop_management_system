@@ -12,7 +12,7 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      String   @default("USER")
+  role      String?   @default("user")
   sweet     Sweet[]
   createdAt DateTime @default(now())
 }
@@ -31,6 +31,6 @@ model Sweet {
 }
 
 enum Role {
-  USER
-  ADMIN
+  user
+  admin
 }

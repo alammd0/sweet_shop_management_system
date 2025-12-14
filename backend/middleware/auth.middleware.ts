@@ -35,7 +35,7 @@ export const authMiddleware = async (req: Request, res: Response, next : NextFun
 
 export const isAdmin = (req : Request, res : Response, next : NextFunction) => {
     try {
-        if(req.role === "ADMIN"){
+        if(req.role === "admin"){
             next();
         }
         else{
@@ -52,7 +52,7 @@ export const isAdmin = (req : Request, res : Response, next : NextFunction) => {
 }
 
 export const isUser = (req : Request, res : Response, next : NextFunction) => {
-    if(req.role === "USER"){
+    if(req.role === "user"){
         next();
     }
     else{

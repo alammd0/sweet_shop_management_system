@@ -9,7 +9,7 @@ export const register = async (req: Request, res : Response) => {
 
         // console.log(req.body);
 
-        if(!name || !email || !password || !role){
+        if(!name || !email || !password){
             return res.status(400).json({
                 message : "Please provide all the required fields"
             })
@@ -95,6 +95,11 @@ export const login = async (req: Request, res : Response) => {
 
         return res.status(200).json({
             message : "User logged in successfully",
+            data :{
+                name : user.name,
+                email : user.email,
+                role : user.role
+            },
             token
         })
     }

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.1.0",
   "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  role      String   @default(\"USER\")\n  sweet     Sweet[]\n  createdAt DateTime @default(now())\n}\n\nmodel Sweet {\n  id          String   @id @default(cuid())\n  name        String\n  description String\n  category    String\n  image       String?\n  price       Int\n  quantity    Int\n  user        User     @relation(fields: [userId], references: [id])\n  userId      String\n  createdAt   DateTime @default(now())\n}\n\nenum Role {\n  USER\n  ADMIN\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  role      String?  @default(\"user\")\n  sweet     Sweet[]\n  createdAt DateTime @default(now())\n}\n\nmodel Sweet {\n  id          String   @id @default(cuid())\n  name        String\n  description String\n  category    String\n  image       String?\n  price       Int\n  quantity    Int\n  user        User     @relation(fields: [userId], references: [id])\n  userId      String\n  createdAt   DateTime @default(now())\n}\n\nenum Role {\n  user\n  admin\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
