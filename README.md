@@ -20,7 +20,6 @@ This is a full-stack web application for managing a sweet shop. It provides feat
 *   **Prisma:** Next-generation ORM for Node.js and TypeScript.
 *   **PostgreSQL:** Open-source relational database.
 *   **JSON Web Tokens (JWT):** For secure authentication.
-*   **Cloudinary:** For image uploads.
 
 ### Frontend
 
